@@ -1,7 +1,5 @@
 import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -11,54 +9,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.shubhu1026.mapd721_a3_shubhampatel.ui.theme.MAPD721A3ShubhamPatelTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MAPD721A3ShubhamPatelTheme {
-                val navController = rememberNavController()
-
-                NavHost(navController, startDestination = Screen.MainScreen.route) {
-                    composable(Screen.MainScreen.route) {
-                        MainScreen(navController)
-                    }
-                    composable(Screen.TransitionAnimation.route) {
-                        Text("Transition Animation")
-                    }
-                    composable(Screen.ScaleAnimation.route) {
-                        Text("Scale Animation")
-                    }
-                    composable(Screen.InfiniteAnimation.route) {
-                        Text("Infinite Animation")
-                    }
-                    composable(Screen.EnterExitAnimation.route) {
-                        Text("Enter Exit Animation")
-                    }
-                }
-            }
-        }
-    }
-}
-
-sealed class Screen(val route: String) {
-    object MainScreen : Screen("main_screen")
-    object TransitionAnimation : Screen("transition_animation")
-    object ScaleAnimation : Screen("scale_animation")
-    object InfiniteAnimation : Screen("infinite_animation")
-    object EnterExitAnimation : Screen("enter_exit_animation")
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavHostController) {
+fun MainScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -71,20 +28,145 @@ fun MainScreen(navController: NavHostController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = { navController.navigate(Screen.TransitionAnimation.route) }) {
+            Button(onClick = { /* No action */ }) {
                 Text("Transition Animation")
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = { navController.navigate(Screen.ScaleAnimation.route) }) {
+            Button(onClick = { /* No action */ }) {
                 Text("Scale Animation")
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = { navController.navigate(Screen.InfiniteAnimation.route) }) {
+            Button(onClick = { /* No action */ }) {
                 Text("Infinite Animation")
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = { navController.navigate(Screen.EnterExitAnimation.route) }) {
+            Button(onClick = { /* No action */ }) {
                 Text("Enter Exit Animation")
+            }
+        }
+    }
+}
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TransitionAnimationScreen() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Transition Animation") }
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Bottom
+        ) {
+            Box(
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .size(100.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.rocket),
+                    contentDescription = "Rocket"
+                )
+            }
+
+            Button(
+                onClick = { /* No action */ },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            ) {
+                Text("Launch Rocket")
+            }
+        }
+    }
+}
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ScaleAnimationScreen() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Scale Animation") }
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Button(
+                onClick = { /* No action */ }
+            ) {
+                Text("Click Me", fontSize = 20.dp)
+            }
+        }
+    }
+}
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun InfiniteAnimationScreen() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Infinite Animation") }
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.sharingan),
+                contentDescription = "Pulsating Image",
+                modifier = Modifier.size(200.dp)
+            )
+        }
+    }
+}
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun EnterExitAnimationScreen() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Enter Exit Animation") }
+            )
+        }
+    ) {
+        Box(
+         g   modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.naruto),
+                contentDescription = "Image"
+            )
+
+            Button(
+                onClick = { /* No action */ },
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(16.dp)
+            ) {
+                Text("Press for Exit Animation", fontSize = 18.dp)
             }
         }
     }
